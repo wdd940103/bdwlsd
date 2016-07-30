@@ -1,0 +1,195 @@
+<!-- letter=[]全部字母
+letterArr=[]当前字母
+num=4字母数量
+speed=3字母下落速度
+score=10初始分数
+getLetter(num)获取指定数量的字母
+play()开始游戏
+key()摁下键盘消除字母
+this.leve=1等级
+background-size:cover;让图片占满整个窗口
+
+String.fromCharCode(键盘码) -->
+
+<!-- 每个矩形都有一个left top width hright值
+将一个矩形的left+width与另一个的left比较 -->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+body,html{
+	margin: 0;
+	height: 100%;
+}
+ul,li{
+	list-style: none;
+}
+	#box{
+		width: 100%;
+		height: 100%;
+		background: url(images/bei.jpg) no-repeat;
+		background-size: cover;
+		position: absolute;
+	}
+	.start{
+		width: 328px;
+		height: 170px;
+		position: absolute;
+		left: 530px;
+		top: 300px;
+		background: url(images/start.png) center center;
+		/*background-size: cover;*/
+	}
+	.start:active{
+		opacity: 0.7;
+	}
+	.start img{
+		width: 260px;
+		
+	}
+	.fenshu{
+		width: 1366px;
+		height: 630px;
+		margin: 0 auto;
+		position: relative;
+	}
+	.fenshus{
+		width: 480px;
+		height: 50px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		/*background: red;*/
+	}
+	.fenshu p{
+		width: 90px;
+		height: 30px;
+		background: #F5EE5B;
+		font-weight: bold;
+		border: 2px solid #E98101;
+		float: left;
+		margin-left: 15px;
+		color: #C54305;
+		font-size: 18px;
+		padding-left: 10px;
+		line-height: 30px;
+	}
+	.end{
+		width: 328px;
+		height: 211px;
+		/*background: red;*/
+		position: absolute;
+		left: 470px;
+		top: 250px;
+		background: url(images/end.png) center center;
+		display: none;
+	}
+	.end-s{
+		width: 105px;
+		height: 40px;
+		position: absolute;
+		left: 109px;
+		top: 135px;
+		/*background: red;*/
+	}
+	.stop{
+		width: 50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		left: 500px;
+		top: 10px;
+		background: url(images/stop.png) -58px 0;
+	}
+	.stop2{
+		width: 50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		left: 500px;
+		top: 10px;
+		background: url(images/stop.png);
+		display: none;
+	}
+	/*.topbg{
+		width: 180px;
+		height: 180px;
+		background: url(images/feji.png);
+		background-size: cover;
+		position: absolute;
+		right: 0;
+		top: 20px;
+		z-index: 999;
+		animation:move 20s linear infinite alternate;
+	}
+	 @keyframes move{
+	 	0%{
+	 		right: 0;
+	 	}
+	 	100%{
+	 		right:1300px;
+	 	}
+	 }*/
+</style>
+<script src="js/jquery.1.12.3.js"></script>
+</head>
+<body>
+	<div id="box"></div>
+	<div class="topbg"></div>
+	<div class="fenshu">
+		<div class="start"></div>
+		<div class="end">
+			<div class="end-s"></div>
+		</div>
+		<div class="fenshus">
+				<p>等级:1</p>
+				<p>分数:0</p>
+				<p>关卡:1</p>
+				<p>生命:5</p>
+		</div>
+		<div class="stop"></div>
+		<div class="stop2"></div>
+	</div>
+</body>
+<script src="js/game.js"></script>
+<script>
+	var box=document.getElementById("box");
+	var start=document.getElementsByClassName("start")[0];
+	var end=document.getElementsByClassName("end-s")[0];
+	var ends=document.getElementsByClassName("end")[0];
+	var stop=document.getElementsByClassName("stop")[0];
+	var stop2=document.getElementsByClassName("stop2")[0];
+	
+	start.onclick=function(){
+		var a=new games(box);
+		a.play();
+		start.style.display="none";
+		$(".fenshus p").eq(1).text("分数:0");
+		$(".fenshus p").eq(0).text("等级:1");
+		$(".fenshus p").eq(2).text("关卡:1");
+		$(".fenshus p").eq(3).text("生命:5");	
+	}
+
+	ends.onclick=function(){
+		var b=new games(box);
+        b.play();
+        ends.style.display='none';
+        start.style.display="none";
+		$(".fenshus p").eq(1).text("分数:0");
+		$(".fenshus p").eq(0).text("等级:1");
+		$(".fenshus p").eq(2).text("关卡:1");
+		$(".fenshus p").eq(3).text("生命:5");
+	}
+	end.onclick=function(){
+		
+		ends.style.display="none";	
+		// start.style.display="block";
+	}
+
+
+
+	// new games(box);
+</script>
+</html>
